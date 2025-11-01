@@ -1,16 +1,18 @@
 import { Form } from "react-router";
-
 import type { ContactRecord } from "../data";
 
-export default function Contact() {
-    const contact = {
-        first: "Your",
-        last: "Name",
-        avatar: "https://placehold.co/200/200",
-        twitter: "your_twitter_handle",
-        notes: "Some notes",
-        favorite: true,
-    };
+import { getContact } from "../data";
+import type { Route } from "./+types/contact";
+
+export async function loader({ params }: Route.LoaderArgs) {
+    const contact = await getContact(params.contactId);
+    return { contact };
+}
+
+export default function Contact({
+    loaderData,
+}: Route.ComponentProps) {
+    const { contact } = loaderData;
 
     return (
         <div id="contact">
