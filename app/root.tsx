@@ -9,6 +9,7 @@ import {
 import appStylesHref from "./app.css?url";
 import type { Route } from "./+types/root";
 import { createEmptyContact } from "./data";
+import { Analytics } from '@vercel/analytics/react';
 
 export async function action() {
   const contact = await createEmptyContact();
@@ -30,6 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <Analytics />
       </body>
     </html>
   );
